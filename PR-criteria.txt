@@ -1,0 +1,76 @@
+Proposal for community review, comment, and consideration:
+
+Acceptance criteria for enhancement tickets, pull requests, and bug fixes
+
+Who is this for? Any contributor to enhancements, specifications, programers, testers, designers, etc.
+Why have it? A complex software project requires clear communication and good organization to be sustainable.
+
+Good organization and clear communication requires establishing norms and customs
+that make finding relevant information easy, especially for new contributors.
+But these norms should be simple, flexible, and easy to adopt, and easy to adapt.
+
+Some established industry good practices:
+- Each feature has an enhancement ticket in GitHub.
+  - Enhancement tickets are in the format of user stories and should include the following minimum information.
+    - Title
+    - Actor/role (who will use this feature?)
+    - Action/Goal (What does the role want to accomplish)
+    - Benefit/expected outcome
+    - Description (optional)
+    - Acceptance Criteria (a human readable test that demonstrates the feature.)
+
+example enhancement ticket:
+  title: Password Reset.
+  story: "As a user (Role),
+          I want to be able to click a link to reset my password on the login page (Goal),
+          because it was forgotten or lost. (Benefit)"
+  description:
+    - On the user login page, a link to 'lost my password' should be placed under the submit button (see attached wireframe).
+    - This link should direct the user to a page where they can enter identifying information, such as username, email, or
+    - security questions.
+    - When the answers are submitted, the user should receive an email with a link to reset their password.
+  acceptance criteria:
+    - The identifying information should be validated as globally defined.
+    - Password reset link should contain a token that expires after use or 72hrs.
+    - The raw url for the link should be presented to accommodate non-html email clients.
+    - Password reset page should show the username/email of the account, and provide to password fields
+    - The password fields should mask input and apply global password validation rules.
+    - Passwords must match on submission to be accepted as the new password.
+    - Successful password reset should automatically login the user and forward them to their start page.
+
+- Code changes for a specific feature should have the feature ticket id in the branch name
+  example: Presume we are implementing the feature described above and the ticket id is abcd-4321
+  we would name the branch something like 'password_reset_abcd-4321'
+- Pull requests should link to the ticket of the feature they implement in their description.
+  example PR description for 'password_reset_abcd-4321' -> 'master':
+    "Implements feature <link to feature ticket abcd-4321 url>"
+- Features should be covered by unit tests wherever practical (Special cases aren't special enough to
+  break the rules. Although practicality beats purity.)
+- Code should be readable, commented, and tests should pass locally before the PR is submitted.
+
+Code Review:
+- Skills are resources that become more valuable when shared.
+- The volunteer efforts of contributors should be honored through mutual aid, respect, and education.
+- No PR should be rejected without an explanation.
+- Good faith PRs should be met with good faith attempts to bring them to acceptance.
+- Help contributors improve their PRs.
+
+-- Do not accept non passing PRs into the mainline. Don't break the build!
+-- Do help your comrades write clearer user stories, well-formed pull requests, and better code!
+
+Bug Tickets:
+  Bugs can be difficult to squash, and not all of them are easily reproducible.
+  Best efforts should be used to describe a bug.
+    - Whenever possible, link a bug to the ticket describing the feature the bug is located within.
+    - include log files and configurations
+    - provide detailed steps to reproduce the bug.
+  Bugs that cannot be reproduced, cannot be considered fixable.
+  - They should be marked as unreproducible and closed.
+  - They should not be deleted, as several similar reports could show a pattern.
+
+  For a bug to be considered fixed, it should:
+    - Have a ticket assigned to it.
+    - Be reproducible.
+    - Have an associated PR that:
+      - Has a test that fails in the presence of the bug.
+      - A revision of the code that passes the test.
